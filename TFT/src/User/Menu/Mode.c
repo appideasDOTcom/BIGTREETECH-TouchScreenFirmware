@@ -1,5 +1,6 @@
 #include "Mode.h"
 #include "includes.h"
+#include "Configuration.h"
 
 
 void Serial_ReSourceDeInit(void)
@@ -65,7 +66,7 @@ void infoMenuSelect(void)
 void menuMode(void)
 {  
   RADIO modeRadio = {
-    {(u8*)"Serial Touch Screen", (u8*)ST7920_BANNER_TEXT, (u8*)"LCD2004 Simulator"},
+    {(u8*)"ostmoxy touch control", (u8*)ST7920_BANNER_TEXT, (u8*)"LCD2004 Simulator"},
     SIMULATOR_XSTART, SIMULATOR_YSTART,
     BYTE_HEIGHT*2, 2,
     0

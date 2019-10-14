@@ -28,9 +28,9 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS 235
-#define Y_MAX_POS 235
-#define Z_MAX_POS 300
+#define X_MAX_POS 180
+#define Y_MAX_POS 160
+#define Z_MAX_POS 160
 
 //Specify a Pause position as { X, Y, Z_raise }
 #define NOZZLE_PAUSE_RETRACT_LENGTH 15   // (mm)
@@ -70,13 +70,13 @@
  * Current color options from lcd.h: BLACK, BLUE, BROWN, BRRED, CYAN, GBLUE, GRAY, GREEN, MAGENTA, RED, WHITE, YELLOW
  */
 #define ST7920_BKCOLOR BLACK
-#define ST7920_FNCOLOR GREEN
+#define ST7920_FNCOLOR GBLUE
 
 // Show BTT bootscreen when starting up
 #define SHOW_BTT_BOOTSCREEN
 
 // Text displayed at the top of the LCD in 12864 mode
-#define ST7920_BANNER_TEXT "LCD12864 Simulator"
+#define ST7920_BANNER_TEXT "ostmoxy classic control"
 
 // Make the simulator run fullscreen, Not recommended for TFT24
 //#define ST7920_FULLSCREEN
