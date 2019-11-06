@@ -29,7 +29,7 @@
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS 180
-#define Y_MAX_POS 160
+#define Y_MAX_POS 140
 #define Z_MAX_POS 160
 
 //Specify a Pause position as { X, Y, Z_raise }
@@ -76,7 +76,7 @@
 #define SHOW_BTT_BOOTSCREEN
 
 // Text displayed at the top of the LCD in 12864 mode
-#define ST7920_BANNER_TEXT "ostmoxy classic control"
+#define ST7920_BANNER_TEXT "ostmoxy complete control"
 
 // Make the simulator run fullscreen, Not recommended for TFT24
 //#define ST7920_FULLSCREEN
