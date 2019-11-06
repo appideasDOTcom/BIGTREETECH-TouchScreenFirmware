@@ -6,8 +6,8 @@
 #define FAN_NUM      1    // set in 1~6
 
 //                       PLA      PETG       ABS     "CUSTOM1" "CUSTOM2"
-#define PREHEAT_BED      {55,      85,       100,       55,       55}
-#define PREHEAT_HOTEND   {205,     230,      230,       200,      200}
+#define PREHEAT_BED      {70,      82,       90,       55,       55}
+#define PREHEAT_HOTEND   {140,     140,      140,       200,      200}
 //#define PREHEAT_TEXT     {"PLA",  "PETG",   "ABS",     "T2:",    "T3:"}
 
 #define HEAT_MAX_TEMP    {150,    275,       275,       275,       275,       275,       275}    //max temperature can be set
@@ -33,8 +33,8 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS 180
-#define Y_MAX_POS 140
+#define X_MAX_POS 170
+#define Y_MAX_POS 160
 #define Z_MAX_POS 160
 
 // Specify a Pause position as { X, Y, Z_raise }
