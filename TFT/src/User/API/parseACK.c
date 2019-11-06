@@ -4,6 +4,8 @@
 char *ack_rev_buf = dma_mem_buf[SERIAL_PORT];
 static u16 ack_index=0;
 static u8 ack_cur_src = SERIAL_PORT;
+int TGCODE;
+int MODEselect;
 
 void setCurrentAckSrc(uint8_t src)
 {
@@ -124,13 +126,13 @@ startParse:
     if(ack_seen("T:") || ack_seen("T0:")) 
     {
       heatSetCurrentTemp(heatGetCurrentToolNozzle(), ack_value()+0.5);
-      heatSetTargetTemp(heatGetCurrentToolNozzle(), ack_second_value()+0.5);
+      heatSyncTargetTemp(heatGetCurrentToolNozzle(), ack_second_value()+0.5);
       for(TOOL i = BED; i < HEATER_NUM; i++)
       {
         if(ack_seen(toolID[i])) 
         {
           heatSetCurrentTemp(i, ack_value()+0.5);
-          heatSetTargetTemp(i, ack_second_value()+0.5);
+          heatSyncTargetTemp(i, ack_second_value()+0.5);
         }
       
       }
@@ -138,7 +140,23 @@ startParse:
     else if(ack_seen("B:"))		
     {
       heatSetCurrentTemp(BED,ack_value()+0.5);
-      heatSetTargetTemp(BED, ack_second_value()+0.5);
+      heatSyncTargetTemp(BED, ack_second_value()+0.5);
+    }
+    else if(ack_seen("Mean:"))
+    {
+      popupReminder((u8* )"Repeatability Test", (u8 *)ack_rev_buf + ack_index-5);
+      //popupReminder((u8* )"Standard Deviation", (u8 *)&infoCmd.queue[infoCmd.index_r].gcode[5]);
+    }
+    else if(ack_seen("Probe Offset"))
+    {
+      if(ack_seen("Z"))
+      {
+        setCurrentOffset(ack_value());
+      }
+    }
+    else if(ack_seen("Count E:")) // parse actual position, response of "M114"
+    {
+      coordinateSetAxisActualSteps(E_AXIS, ack_value());
     }
     else if(ack_seen(echomagic) && ack_seen(busymagic) && ack_seen("processing"))
     {
@@ -166,14 +184,17 @@ startParse:
 #endif    
     else if(ack_seen(errormagic))
     {
+        if(TGCODE==0)
         ackPopupInfo(errormagic);
     }
     else if(ack_seen(busymagic))
     {
+        if(TGCODE==0)
         ackPopupInfo(busymagic);
     }
     else if(ack_seen(echomagic) && !gcodeProcessed)
     {
+        if(TGCODE==0)
         ackPopupInfo(echomagic);
     }
   }
@@ -203,4 +224,3 @@ void parseRcvGcode(void)
     }
   #endif
 }
-
