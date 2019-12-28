@@ -62,14 +62,19 @@ MENUITEMS machineSettingsItems = {
 // title
 LABEL_MACHINE_SETTINGS,
 // icon                       label
- {{ICON_CUSTOM,               LABEL_CUSTOM},
-  {ICON_RGB_SETTINGS,         LABEL_RGB_SETTINGS},
+ { //{ICON_CUSTOM,               LABEL_CUSTOM},
+  //{ICON_RGB_SETTINGS,         LABEL_RGB_SETTINGS},
 //  {ICON_BLTOUCH,              LABEL_BLTOUCH},
   {ICON_GCODE,                LABEL_GCODE},
+  
+  {ICON_BACKGROUND,           LABEL_BACKGROUND},
+  {ICON_BACKGROUND,           LABEL_BACKGROUND},
+
   {ICON_SHUT_DOWN,            LABEL_SHUT_DOWN},
   {ICON_BACKGROUND,           LABEL_BACKGROUND},
   {ICON_BACKGROUND,           LABEL_BACKGROUND},
   {ICON_BACKGROUND,           LABEL_BACKGROUND},
+
   {ICON_BACK,                 LABEL_BACK},}
 };
 
@@ -84,17 +89,15 @@ void menuMachineSettings(void)
     key_num = menuKeyGetValue();
     switch(key_num)
     {
-      case KEY_ICON_1:
-        infoMenu.menu[++infoMenu.cur] = menuRGBSettings;
-        break;
-      
-      case KEY_ICON_2:
+      case KEY_ICON_0:
         infoMenu.menu[++infoMenu.cur] = menuSendGcode;
+        // infoMenu.menu[++infoMenu.cur] = menuRGBSettings;
         break;
-      
+
       case KEY_ICON_3:
         storeCmd("M81\n");
-      break;
+        break;
+
       
       case KEY_ICON_7:
         infoMenu.cur--;

@@ -7,14 +7,22 @@ MENUITEMS preheatItems = {
 LABEL_PREHEAT,
 // icon                       label
   {
-    {ICON_PREHEAT_PLA,          LABEL_PREHEAT_PLA},
-    {ICON_PREHEAT_PETG,         LABEL_PREHEAT_PETG},
-    {ICON_PREHEAT_ABS,          LABEL_PREHEAT_ABS},
+//     {ICON_PREHEAT_PLA,          LABEL_PREHEAT_PLA},
+//     {ICON_PREHEAT_PETG,         LABEL_PREHEAT_PETG},
+//     {ICON_PREHEAT_ABS,          LABEL_PREHEAT_ABS},
+//     {ICON_BACKGROUND,           LABEL_BACKGROUND},
+//     {ICON_BACKGROUND,           LABEL_BACKGROUND},
+// //    {ICON_PREHEAT_CUSTOM1,      LABEL_PREHEAT_CUSTOM1},
+// //    {ICON_PREHEAT_CUSTOM2,      LABEL_PREHEAT_CUSTOM2},
+//     {ICON_PREHEAT_BOTH,         LABEL_PREHEAT_BOTH},
+//     {ICON_HEAT,                 LABEL_HEAT},
+//     {ICON_BACK,                 LABEL_BACK},
+    {ICON_NOZZLE,          LABEL_PREHEAT_PLA},
+    {ICON_NOZZLE,         LABEL_PREHEAT_PETG},
+    {ICON_NOZZLE,          LABEL_PREHEAT_ABS},
     {ICON_BACKGROUND,           LABEL_BACKGROUND},
+    {ICON_BABYSTEP,         LABEL_PREHEAT_BOTH},
     {ICON_BACKGROUND,           LABEL_BACKGROUND},
-//    {ICON_PREHEAT_CUSTOM1,      LABEL_PREHEAT_CUSTOM1},
-//    {ICON_PREHEAT_CUSTOM2,      LABEL_PREHEAT_CUSTOM2},
-    {ICON_PREHEAT_BOTH,         LABEL_PREHEAT_BOTH},
     {ICON_HEAT,                 LABEL_HEAT},
     {ICON_BACK,                 LABEL_BACK},
   }
@@ -22,7 +30,7 @@ LABEL_PREHEAT,
 
 const ITEM itemToolPreheat[] = {
 // icon                       label
-  {ICON_PREHEAT_BOTH,         LABEL_PREHEAT_BOTH},
+  {ICON_BABYSTEP,         LABEL_PREHEAT_BOTH},
   {ICON_BED,                  LABEL_BED},
   {ICON_NOZZLE,               LABEL_NOZZLE},
   {ICON_NOZZLE,               LABEL_NOZZLE},
@@ -65,7 +73,7 @@ void menuPreheat(void)
         }
         break;
         
-      case KEY_ICON_5:
+      case KEY_ICON_4:
         nowHeater = (TOOLPREHEAT)((nowHeater+1) % 3);
         preheatItems.items[key_num] = itemToolPreheat[nowHeater];
         menuDrawItem(&preheatItems.items[key_num], key_num);;
