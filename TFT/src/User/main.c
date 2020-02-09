@@ -2,7 +2,7 @@
 
 HOST  infoHost;  // Information interaction with Marlin
 MENU  infoMenu;  // Menu structure
-CHAR_INFO info;
+
 void Hardware_GenericInit(void)
 {
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -22,6 +22,8 @@ void Hardware_GenericInit(void)
   XPT2046_Init();
   W25Qxx_Init();
   LCD_Init();
+  readStoredPara();
+  LCD_RefreshDirection();  //refresh display direction after reading settings
   scanUpdates();
   SD_DeInit();
   
@@ -37,16 +39,18 @@ void Hardware_GenericInit(void)
   FIL_Runout_Init();
 #endif
 
-  if(readStoredPara() == false)
-  {
-    infoSettingsReset();
+  if(readStoredPara() == false) // Read settings parameter
+  {    
+    TSC_Calibration();
+    storePara();
   }
-  LCD_RefreshDirection();  //refresh display direction after reading settings
-  infoMenuSelect();  
+  GUI_RestoreColorDefault();
+  infoMenuSelect();
 }
 
 int main(void)
 {
+
   SCB->VTOR = VECT_TAB_FLASH;
  
   Hardware_GenericInit();

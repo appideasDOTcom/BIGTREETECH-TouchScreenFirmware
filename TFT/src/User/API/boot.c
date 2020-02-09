@@ -17,7 +17,8 @@ const char iconBmpName[][32]={
 "BLTouchStow", "BLTouchTest", "BLTouchRepeat", "TSCSettings", "MachineSettings", "FeatureSettings", "ProbeOffset", "EEPROMSave", "SilentOn", "ShutDown",
 "RGB_Settings", "RGB_Red", "RGB_Green", "RGB_Blue", "RGB_White", "RGB_Off", "Preheat_Both", "Preheat_PLA", "Preheat_PETG", "Preheat_ABS",
 "PowerSupply", "Custom", "Custom0", "Custom1", "Custom2", "Custom3", "Custom4", "Custom5", "Custom6", "Home_Move", "Heat_Fan",
-"ManualLevel", "CoolDown", "SilentOff",
+"ManualLevel", "CoolDown", "SilentOff","StatusNozzle","StatusBed","StatusFan","MainMenu","StatusSpeed","StatusFlow",
+"parametersetting", "global_nozzle", "global_bed", "ledcolor",
 }; 
 
 u8 scanUpdateFile(void)
@@ -116,23 +117,28 @@ bool bmpDecode(char *bmp, u32 addr)
 void updateIcon(void)
 {
   char nowBmp[64];  
-  GUI_Clear(BLACK);
-  GUI_DispString(100, 5, (u8*)"Icon Updating...!",0);
+  GUI_Clear(BACKGROUND_COLOR);
+  GUI_DispString(100, 5, (u8*)"Icon Updating...!");
 
   if(bmpDecode(BMP_ROOT_DIR"/Logo.bmp", LOGO_ADDR))
   {
     LOGO_ReadDisplay();
   }
-  GUI_Clear(BLACK);
-  for(int i=0; i<aCount(iconBmpName); i++)
+
+  GUI_Clear(BACKGROUND_COLOR);
+  for(int i=0; i<COUNT(iconBmpName); i++)
   {
     my_sprintf(nowBmp, BMP_ROOT_DIR"/%s.bmp", iconBmpName[i]);
     if(bmpDecode(nowBmp, ICON_ADDR(i)))
     {
       GUI_ClearRect(labelUpdateRect.x0, labelUpdateRect.y0, labelUpdateRect.x1, labelUpdateRect.y1);
-      GUI_DispStringInPrect(&labelUpdateRect, (u8 *)nowBmp, 0);
+      GUI_DispStringInPrect(&labelUpdateRect, (u8 *)nowBmp);
       ICON_ReadDisplay(iconUpdateRect.x0, iconUpdateRect.y0, i);
     }
+  }
+    if(bmpDecode(BMP_ROOT_DIR"/InfoBox.bmp", INFOBOX_ADDR))
+  {
+    ICON_CustomReadDisplay(iconUpdateRect.x0, iconUpdateRect.y0, INFOBOX_WIDTH, INFOBOX_HEIGHT,INFOBOX_ADDR);
   }
 }
 
@@ -149,10 +155,10 @@ void updateFont(char *font, u32 addr)
 
   tempbuf = malloc(W25QXX_SECTOR_SIZE);
   if (tempbuf == NULL)  return;
-  GUI_Clear(BLACK);
+  GUI_Clear(BACKGROUND_COLOR);
   my_sprintf((void *)buffer,"%s Size: %dKB",font, (u32)f_size(&myfp)>>10);
-  GUI_DispString(0, 100, (u8*)buffer,0);
-  GUI_DispString(0, 140, (u8*)"Updating:   %",0);
+  GUI_DispString(0, 100, (u8*)buffer);
+  GUI_DispString(0, 140, (u8*)"Updating:   %");
   
   while(!f_eof(&myfp))
   {
@@ -164,7 +170,7 @@ void updateFont(char *font, u32 addr)
     if(progress != offset * 100 / f_size(&myfp))
     {
       progress = offset * 100 / f_size(&myfp);
-      GUI_DispDec(0 + BYTE_WIDTH*9, 140, progress, 3, 1, RIGHT);
+      GUI_DispDec(0 + BYTE_WIDTH*9, 140, progress, 3, RIGHT);
     }
     if(rnum !=W25QXX_SECTOR_SIZE)break;
   }
@@ -173,10 +179,22 @@ void updateFont(char *font, u32 addr)
   free(tempbuf);
 }
 
+void scanResetDir(void)
+{
+  FIL resetfile;
+  if (f_open(&resetfile, TFT_RESET_FILE, FA_OPEN_EXISTING | FA_READ) == FR_OK)
+  {
+    f_close(&resetfile);
+    f_rename(TFT_RESET_FILE, TFT_RESET_FILE ".DONE");
+    infoSettingsReset();
+    TSC_Calibration();
+    storePara();
+  }
+}
 
 void scanUpdates(void)
 {
-  volatile u8 result = 0;   //must volatile！
+  volatile u8 result = 0;   //must volatileï¼
   if(mountSDCard())
   {
     result = scanUpdateFile();
@@ -190,5 +208,6 @@ void scanUpdates(void)
       updateIcon();
     }
     if (result) f_rename(ROOT_DIR, ROOT_DIR".CUR");
+    scanResetDir();
   }
 }

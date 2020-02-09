@@ -6,7 +6,6 @@ SETTINGS infoSettings;
 // Reset settings data
 void infoSettingsReset(void)
 {
-  TSC_Calibration();
   infoSettings.baudrate = 115200;
   infoSettings.language = ENGLISH;
   infoSettings.mode = SERIAL_TSC;
@@ -16,7 +15,12 @@ void infoSettingsReset(void)
   infoSettings.font_color = ST7920_FNCOLOR;
   infoSettings.silent = 0;
   infoSettings.auto_off = 0;
-  storePara();  
+  infoSettings.terminalACK = 0;
+  infoSettings.invert_yaxis = 0;
+  infoSettings.move_speed = 0;
+  infoSettings.led_color = LED_OFF;
+  infoSettings.invert_zaxis = 0;
+  
 }
 
 // Version infomation
@@ -30,10 +34,11 @@ void menuInfo(void)
   u16 centerY = LCD_HEIGHT/2;
   u16 startX = MIN(HW_X, FW_X);
   
-  GUI_Clear(BLACK);
+  GUI_Clear(BACKGROUND_COLOR);
 
-  GUI_DispString(startX, centerY - BYTE_HEIGHT, (u8 *)hardware, 0);
-  GUI_DispString(startX, centerY, (u8 *)firmware, 0);
+  GUI_DispString(startX, centerY - BYTE_HEIGHT, (u8 *)hardware);
+  GUI_DispString(startX, centerY, (u8 *)firmware);
+  GUI_DispStringInRect(20, LCD_HEIGHT - (BYTE_HEIGHT*2), LCD_WIDTH-20, LCD_HEIGHT, textSelect(LABEL_TOUCH_TO_EXIT));
 
   while(!isPress()) loopProcess();
   while(isPress())  loopProcess();
@@ -44,13 +49,14 @@ void menuInfo(void)
 // Set uart pins to input, free uart
 void menuDisconnect(void)
 {
-  GUI_Clear(BLACK);
-  GUI_DispStringInRect(20, 0, LCD_WIDTH-20, LCD_HEIGHT, textSelect(LABEL_DISCONNECT_INFO), 0);
+  GUI_Clear(BACKGROUND_COLOR);
+  GUI_DispStringInRect(20, 0, LCD_WIDTH-20, LCD_HEIGHT, textSelect(LABEL_DISCONNECT_INFO));
+  GUI_DispStringInRect(20, LCD_HEIGHT - (BYTE_HEIGHT*2), LCD_WIDTH-20, LCD_HEIGHT, textSelect(LABEL_TOUCH_TO_EXIT));
 
-  Serial_DeConfig();
+  Serial_DeInit();
   while(!isPress());
   while(isPress());
-  Serial_Config(infoSettings.baudrate);
+  Serial_Init(infoSettings.baudrate);
   
   infoMenu.cur--;
 }
@@ -124,7 +130,8 @@ void menuSettings(void)
         settingsItems.items[key_num] = itemBaudrate[item_baudrate_i];
         menuDrawItem(&settingsItems.items[key_num], key_num);
         infoSettings.baudrate = item_baudrate[item_baudrate_i];
-        Serial_Config(infoSettings.baudrate);
+        Serial_DeInit(); // Serial_Init() will malloc a dynamic memory, so Serial_DeInit() first to free, then malloc again.
+        Serial_Init(infoSettings.baudrate);
         break;
 
       case KEY_ICON_7:
