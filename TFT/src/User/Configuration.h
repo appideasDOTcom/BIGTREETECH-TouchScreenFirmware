@@ -49,8 +49,8 @@
 #define PREHEAT_TEXT     {"PLA",  "PETG",   "ABS"}
 
 #define HEAT_MAX_TEMP    {150,    310,       275,       275,       275,       275,       275}    //max temperature can be set
-#define HEAT_SIGN_ID     {"B:",   "T0:",     "T1:",     "T2:",     "T3:",     "T4:",     "T5:"}
-#define HEAT_DISPLAY_ID  {"Bed",  "T0",      "T1",      "T2",      "T3",      "T4",      "T5"}
+#define HEAT_SIGN_ID     {"B:",   "T:",     "T1:",     "T2:",     "T3:",     "T4:",     "T5:"}
+#define HEAT_DISPLAY_ID  {"Bed",  "HE",      "T1",      "T2",      "T3",      "T4",      "T5"}
 #define HEAT_CMD         {"M140", "M104 T0", "M104 T1", "M104 T2", "M104 T3", "M104 T4", "M104 T5" };
 #define HEAT_WAIT_CMD    {"M190", "M109 T0", "M109 T1", "M109 T2", "M109 T3", "M109 T4", "M109 T5" };
 
@@ -58,10 +58,10 @@
 #define EXTRUDER_ID      {"E0",   "E1",      "E2",      "E3",      "E4",      "E5"}
 
 #define FAN_MAX_PWM      {255,       255,       255,       255,       255,       255}
-#define FAN_ID           {"F0",    "F1",    "F2",    "F3",    "F4",    "F5"}
+#define FAN_ID           {"Fan",    "F1",    "F2",    "F3",    "F4",    "F5"}
 #define FAN_CMD          {"M106 P0", "M106 P1", "M106 P2", "M106 P3", "M106 P4", "M106 P5" };
 
-#define SPEED_ID         {"Sp.", "Fr."}
+#define SPEED_ID         {"SP", "FR"}
 
 // Default move speed mm/min
 #define DEFAULT_SPEED_MOVE      3000
@@ -107,7 +107,7 @@
 #define LEVELING_POINT_3_Y         (Y_MAX_POS - 20)
 #define LEVELING_POINT_4_X         (X_MIN_POS + 20)
 #define LEVELING_POINT_4_Y         (Y_MAX_POS - 20)
-#define LEVELING_POINT_Z           0f  // Z-axis position when nozzle stays for leveling
+#define LEVELING_POINT_Z           0.0f  // Z-axis position when nozzle stays for leveling
 #define LEVELING_POINT_MOVE_Z      10.0f // Z-axis position when nozzle move to next point
 #define LEVELING_POINT_XY_FEEDRATE 6000  // (mm/min) X and Y axes move feedrate
 #define LEVELING_POINT_Z_FEEDRATE  600   // (mm/min) Z axis move feedrate
@@ -137,7 +137,7 @@
 
 // Enable Unified Move Menu
 // Move, Home, Extrude, ABL at one Place and bring Gcode Menu on Home Menu
-// #define UNIFIED_MENU
+#define UNIFIED_MENU
 
 /**
  * Enable list mode in Files menu and settings menu
