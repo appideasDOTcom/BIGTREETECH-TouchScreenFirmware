@@ -135,6 +135,10 @@
 // this does not work if LIST MODE is enabled. To invert z axis in LIST MODE go to setting->feature settings
 //#define INVERT_ZAXIS
 
+// Invert the X axis move Direction
+// this does not work if LIST MODE is enabled.
+#define INVERT_XAXIS
+
 // Enable Unified Move Menu
 // Move, Home, Extrude, ABL at one Place and bring Gcode Menu on Home Menu
 #define UNIFIED_MENU
@@ -144,7 +148,7 @@
  * It is friendly to display long file name, but the model preview feature is not available
  * Disable this if you want to use the model preview feature
  */
-#define MENU_LIST_MODE
+// #define MENU_LIST_MODE
 
 
 //-------RESET SETTINGS & TOUCH SCREEN CALIBRATION------||
