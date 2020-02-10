@@ -48,9 +48,9 @@ LABEL_MOVE,
       {ICON_Y_INC,                LABEL_Y_INC},
       {ICON_Z_INC,                LABEL_Z_INC},
       {ICON_1_MM,                 LABEL_1_MM},
-      {ICON_X_DEC,                LABEL_X_DEC},
-      {ICON_Y_DEC,                LABEL_Y_DEC},
-      {ICON_X_INC,                LABEL_X_INC},
+      {ICON_X_DEC,                LABEL_X_INC},
+      {ICON_Y_DEC,				  LABEL_Y_DEC},
+	  {ICON_X_INC,                LABEL_X_DEC},
       {ICON_BACK,                 LABEL_BACK},
     #else
       {ICON_Z_DEC,                LABEL_Z_DEC},
@@ -219,7 +219,7 @@ void menuMove(void)
                   menuDrawItem(&moveItems.items[key_num], key_num);
                   break;
 
-            case KEY_ICON_4: storeCmd("G1 X-%.1f\n", item_move_len[item_move_len_i]);  break;
+			case KEY_ICON_4: storeCmd("G1 X%.1f\n",  item_move_len[item_move_len_i]);  break;
 
             case KEY_ICON_5:
                   #ifdef MENU_LIST_MODE
@@ -234,7 +234,7 @@ void menuMove(void)
                   #endif
                   break;
 
-            case KEY_ICON_6: storeCmd("G1 X%.1f\n",  item_move_len[item_move_len_i]);  break;
+			case KEY_ICON_6: storeCmd("G1 X-%.1f\n", item_move_len[item_move_len_i]);  break;
             case KEY_ICON_7: infoMenu.cur--; break;
             default:break; 
         
