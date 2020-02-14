@@ -91,7 +91,7 @@
 #define NOZZLE_PAUSE_Z_FEEDRATE     300  // (mm/min) Z axis feedrate
 
 // Send G29 for auto bed leveling
-// #define AUTO_BED_LEVELING
+//#define AUTO_BED_LEVELING
 #ifdef AUTO_BED_LEVELING
   // Enable this will send "M500" after "G29" to store leveling value
   // and send "M420 S1" to enable leveling state after startup
@@ -129,7 +129,7 @@
 
 //Invert the X Axis move Direction
 // this does not work if LIST MODE is enabled. To invert x axis in LIST MODE go to setting->feature settings
-//#define INVERT_XAXIS
+#define INVERT_XAXIS
 
 // Invert the Y Axis move Direction
 // this does not work if LIST MODE is enabled. To invert y axis in LIST MODE go to setting->feature settings
@@ -138,10 +138,6 @@
 //Invert the Z Axis move Direction
 // this does not work if LIST MODE is enabled. To invert z axis in LIST MODE go to setting->feature settings
 //#define INVERT_ZAXIS
-
-// Invert the X axis move Direction
-// this does not work if LIST MODE is enabled.
-#define INVERT_XAXIS
 
 // Enable Unified Move Menu
 // Move, Home, Extrude, ABL at one Place and bring Gcode Menu on Home Menu

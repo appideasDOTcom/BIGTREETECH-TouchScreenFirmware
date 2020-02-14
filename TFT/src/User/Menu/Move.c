@@ -49,18 +49,6 @@
     #define ZGCODE_DOWN "G1 Z-%.1f\n"
   #endif
 
-  #ifdef INVERT_XAXIS
-    #define LABEL_XAXIS_UP LABEL_X_DEC
-    #define LABEL_XAXIS_DOWN LABEL_X_INC
-    #define XGCODE_UP "G1 X-%.1f\n"
-    #define XGCODE_DOWN "G1 X%.1f\n"
-  #else
-    #define LABEL_XAXIS_UP LABEL_X_INC
-    #define LABEL_XAXIS_DOWN LABEL_X_DEC
-    #define XGCODE_UP "G1 X%.1f\n"
-    #define XGCODE_DOWN "G1 X-%.1f\n"
-  #endif
-
 #endif
 
 //1 title, ITEM_PER_PAGE item
