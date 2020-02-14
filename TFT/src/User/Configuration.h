@@ -127,6 +127,10 @@
 // update the icons from alternate icon folder
 #define ALTERNATIVE_MOVE_MENU
 
+//Invert the X Axis move Direction
+// this does not work if LIST MODE is enabled. To invert x axis in LIST MODE go to setting->feature settings
+//#define INVERT_XAXIS
+
 // Invert the Y Axis move Direction
 // this does not work if LIST MODE is enabled. To invert y axis in LIST MODE go to setting->feature settings
 //#define INVERT_YAXIS
