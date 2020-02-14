@@ -69,8 +69,8 @@
 #define SPEED_MOVE_FAST         5000
 // Extrude speed mm/min
 #define EXTRUDE_SLOW_SPEED      60
-#define EXTRUDE_NORMAL_SPEED    600
-#define EXTRUDE_FAST_SPEED      1200
+#define EXTRUDE_NORMAL_SPEED    300
+#define EXTRUDE_FAST_SPEED      600
 
 // Size of machine
 #define X_MIN_POS 0
@@ -86,9 +86,9 @@
 #define NOZZLE_PAUSE_X_POSITION     (X_MIN_POS + 20)  // (mm) Must be an integer
 #define NOZZLE_PAUSE_Y_POSITION     (Y_MIN_POS + 20)  // (mm) Must be an integer
 #define NOZZLE_PAUSE_Z_RAISE        20   // (mm)
-#define NOZZLE_PAUSE_E_FEEDRATE     6000 // (mm/min) retract & purge feedrate
+#define NOZZLE_PAUSE_E_FEEDRATE     3000 // (mm/min) retract & purge feedrate
 #define NOZZLE_PAUSE_XY_FEEDRATE    6000 // (mm/min) X and Y axes feedrate
-#define NOZZLE_PAUSE_Z_FEEDRATE     600  // (mm/min) Z axis feedrate
+#define NOZZLE_PAUSE_Z_FEEDRATE     300  // (mm/min) Z axis feedrate
 
 // Send G29 for auto bed leveling
 // #define AUTO_BED_LEVELING
@@ -110,7 +110,7 @@
 #define LEVELING_POINT_Z           0.0f  // Z-axis position when nozzle stays for leveling
 #define LEVELING_POINT_MOVE_Z      10.0f // Z-axis position when nozzle move to next point
 #define LEVELING_POINT_XY_FEEDRATE 6000  // (mm/min) X and Y axes move feedrate
-#define LEVELING_POINT_Z_FEEDRATE  600   // (mm/min) Z axis move feedrate
+#define LEVELING_POINT_Z_FEEDRATE  300   // (mm/min) Z axis move feedrate
 
 // Power Supply
 #define PS_ON_ACTIVE_HIGH    true   // Set 'false' for ATX (1), 'true' for X-Box (2)
