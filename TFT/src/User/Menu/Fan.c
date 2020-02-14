@@ -11,9 +11,10 @@ LABEL_FAN,
   {ICON_BACKGROUND,           LABEL_BACKGROUND},
   {ICON_BACKGROUND,           LABEL_BACKGROUND},
   {ICON_INC,                  LABEL_INC},
-  {ICON_FAN ,                 LABEL_FAN},
+//   {ICON_FAN ,                 LABEL_FAN},
   {ICON_FAN_FULL_SPEED,       LABEL_FAN_FULL_SPEED},
   {ICON_STOP,                 LABEL_STOP},
+  {ICON_BACKGROUND,           LABEL_BACKGROUND},
   {ICON_BACK,                 LABEL_BACK},}
 };
 
@@ -124,16 +125,16 @@ void menuFan(void)
         }
         break;
         
-      case KEY_ICON_4:
-        curIndex = (curIndex + 1) % FAN_NUM;
-        showFanSpeed();
-        break;
+    //   case KEY_ICON_4:
+    //     curIndex = (curIndex + 1) % FAN_NUM;
+    //     showFanSpeed();
+    //     break;
       
-      case KEY_ICON_5:
+      case KEY_ICON_4:
         fanSpeed[curIndex] = fanMaxPWM[curIndex];
         break;
       
-      case KEY_ICON_6:
+      case KEY_ICON_5:
         fanSpeed[curIndex] = 0;
         break;
       

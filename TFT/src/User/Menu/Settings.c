@@ -67,11 +67,11 @@ MENUITEMS settingsItems = {
 LABEL_SETTINGS,
 // icon                       label
  {{ICON_SCREEN_SETTINGS,      LABEL_SCREEN_SETTINGS},
-  {ICON_MACHINE_SETTINGS,     LABEL_MACHINE_SETTINGS},
-  {ICON_FEATURE_SETTINGS,     LABEL_FEATURE_SETTINGS},
   {ICON_SCREEN_INFO,          LABEL_SCREEN_INFO},
   {ICON_DISCONNECT,           LABEL_DISCONNECT},
   {ICON_BAUDRATE,             LABEL_BAUDRATE_115200},
+  {ICON_BACKGROUND,           LABEL_BACKGROUND},
+  {ICON_BACKGROUND,           LABEL_BACKGROUND},
   {ICON_BACKGROUND,           LABEL_BACKGROUND},
   {ICON_BACK,                 LABEL_BACK},}
 };
@@ -95,7 +95,7 @@ void menuSettings(void)
     if(infoSettings.baudrate == item_baudrate[i])
     {
       item_baudrate_i = i;
-      settingsItems.items[KEY_ICON_5] = itemBaudrate[item_baudrate_i];
+      settingsItems.items[KEY_ICON_3] = itemBaudrate[item_baudrate_i];
     }
   }
 
@@ -110,23 +110,23 @@ void menuSettings(void)
         infoMenu.menu[++infoMenu.cur] = menuScreenSettings;
         break;
       
-      case KEY_ICON_1: 
-        infoMenu.menu[++infoMenu.cur] = menuMachineSettings;
-        break;
+    //   case KEY_ICON_1: 
+    //     infoMenu.menu[++infoMenu.cur] = menuMachineSettings;
+    //     break;
       
-      case KEY_ICON_2:
-        infoMenu.menu[++infoMenu.cur] = menuFeatureSettings;
-        break;
+    //   case KEY_ICON_2:
+    //     infoMenu.menu[++infoMenu.cur] = menuFeatureSettings;
+    //     break;
       
-      case KEY_ICON_3:
+      case KEY_ICON_1:
         infoMenu.menu[++infoMenu.cur] = menuInfo;
         break;
       
-      case KEY_ICON_4:
+      case KEY_ICON_2:
         infoMenu.menu[++infoMenu.cur] = menuDisconnect;
         break;
       
-      case KEY_ICON_5:
+      case KEY_ICON_3:
         item_baudrate_i = (item_baudrate_i + 1) % ITEM_BAUDRATE_NUM;                
         settingsItems.items[key_num] = itemBaudrate[item_baudrate_i];
         menuDrawItem(&settingsItems.items[key_num], key_num);
